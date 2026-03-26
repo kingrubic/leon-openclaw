@@ -40,7 +40,7 @@ Before running, ensure the OAuth client in Google Cloud has this exact redirect 
 http://localhost:3000/oauth/callback
 ```
 
-When the script starts, it prints a Google OAuth URL. Open it in the browser, sign in, and approve access.
+When the script starts, it prints a Google OAuth URL with full scopes for Drive, Sheets, and Docs. Open it in the browser, sign in, and approve access.
 
 On success, tokens will be saved to:
 
