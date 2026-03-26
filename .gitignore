@@ -1,4 +1,6 @@
 google-credentials/
+!google-credentials/README.md
+google-credentials/*.tokens.json
 *.secret.json
 .env
 .env.*
