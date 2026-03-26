@@ -1,0 +1,4 @@
+google-credentials/
+*.secret.json
+.env
+.env.*
