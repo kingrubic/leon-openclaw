@@ -48,3 +48,12 @@ Add whatever helps you do your job. This is your cheat sheet.
   - `/Users/admin/.openclaw/tools/bin/crawl4ai-doctor`
 - Playwright browser cache installed and working for this runtime.
 - Verified working with: `crawl4ai-doctor`
+- Dependency note: keep `crawl4ai` isolated from `Scrapling` because they currently want different `lxml` major versions.
+
+## Scrapling runtime
+
+- Stable runtime path: `/Users/admin/.openclaw/tools/scrapling-venv`
+- Python: `/opt/homebrew/bin/python3.11`
+- Wrapper script:
+  - `/Users/admin/.openclaw/tools/bin/scrapling-python`
+- Verified import working with: `import scrapling`
