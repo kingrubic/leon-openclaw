@@ -1,34 +1,49 @@
 {
-  "updatedAt": "2026-03-27T09:57:00+07:00",
+  "updatedAt": "2026-03-27T10:20:00+07:00",
   "jobs": [
+    {
+      "id": "06b9382a-9126-488e-9e5d-d3e6128c36a0",
+      "name": "India eVisa daily report 8:00 AM",
+      "enabled": true,
+      "schedule": {"kind": "cron", "expr": "0 8 * * *", "tz": "Asia/Saigon"},
+      "sessionTarget": "isolated",
+      "delivery": {"mode": "announce"},
+      "summary": "India e-Visa daily report using fixed workbook, approved report structure, QA rules, and summary-tracker update."
+    },
+    {
+      "id": "27b9324a-e05e-426e-a28a-7c1839b4e472",
+      "name": "Sri Lanka ETA daily report 8:15 AM",
+      "enabled": true,
+      "schedule": {"kind": "cron", "expr": "15 8 * * *", "tz": "Asia/Saigon"},
+      "sessionTarget": "isolated",
+      "delivery": {"mode": "announce"},
+      "summary": "Sri Lanka ETA daily report using fixed workbook, approved report structure, strict contradiction caveats, and summary-tracker update."
+    },
     {
       "id": "21242d16-3ae0-4898-abae-ad59e0a32b46",
       "name": "Australia visa daily report 8:30 AM",
       "enabled": true,
-      "schedule": {
-        "kind": "cron",
-        "expr": "30 8 * * *",
-        "tz": "Asia/Saigon"
-      },
+      "schedule": {"kind": "cron", "expr": "30 8 * * *", "tz": "Asia/Saigon"},
       "sessionTarget": "isolated",
-      "delivery": {
-        "mode": "announce"
-      },
-      "summary": "Australia daily visa report for ETA 601 / eVisitor 651 / Visitor 600 / Transit 771 using fixed workbook Australia Visa - Official Tracker and approved 8-section report format."
+      "delivery": {"mode": "announce"},
+      "summary": "Australia daily visa report for ETA 601 / eVisitor 651 / Visitor 600 / Transit 771 using fixed workbook and approved 8-section report format."
+    },
+    {
+      "id": "05472b7f-dead-44f9-a075-66908dc0c95d",
+      "name": "Indonesia visa daily report 8:45 AM",
+      "enabled": true,
+      "schedule": {"kind": "cron", "expr": "45 8 * * *", "tz": "Asia/Saigon"},
+      "sessionTarget": "isolated",
+      "delivery": {"mode": "announce"},
+      "summary": "Indonesia daily visa report using fixed workbook, approved 8-section report format, and current trial scope B1/C1/D1/C2/D2/B4/C4/D4 from the official eVisa selector."
     },
     {
       "id": "c8ed73ec-b969-49bb-802d-bc8906d40cc9",
       "name": "Workspace GitHub backup 00:00",
       "enabled": true,
-      "schedule": {
-        "kind": "cron",
-        "expr": "0 0 * * *",
-        "tz": "Asia/Saigon"
-      },
+      "schedule": {"kind": "cron", "expr": "0 0 * * *", "tz": "Asia/Saigon"},
       "sessionTarget": "isolated",
-      "delivery": {
-        "mode": "announce"
-      },
+      "delivery": {"mode": "announce"},
       "summary": "Daily GitHub backup for Leon workspace backup-relevant content: memory, skills, and cron-backup.json."
     }
   ]
