@@ -87,7 +87,18 @@ git push origin main
 
 ## 6. Phục hồi cron thật trong OpenClaw
 
-`cron-backup.json` chỉ là snapshot để đối chiếu, không tự tạo lại cron chạy thật.
+`cron-backup.json` chỉ là snapshot tóm tắt để đối chiếu.
+
+File cần dùng để phục hồi gần như y hệt máy này là:
+- `cron-restore.json`
+
+File này chứa đầy đủ:
+- tên job
+- lịch chạy
+- timezone
+- session target
+- delivery mode
+- full payload message
 
 Hiện các cron chuẩn cần có:
 - India eVisa daily report — `08:00` Asia/Saigon
@@ -96,7 +107,7 @@ Hiện các cron chuẩn cần có:
 - Indonesia visa daily report — `08:45` Asia/Saigon
 - Workspace GitHub backup — `00:00` Asia/Saigon
 
-Sau khi sang máy mới, cần tạo lại các cron này trong OpenClaw.
+Sau khi sang máy mới, dùng `cron-restore.json` làm nguồn chuẩn để Leon / OpenClaw tạo lại các cron này trong scheduler của máy mới.
 
 ## 7. Kiểm tra workbook cố định của từng nước
 
@@ -152,6 +163,7 @@ Nhưng vẫn phải phục hồi thêm:
 - `memory/2026-03-26.md`
 - `memory/2026-03-27.md`
 - `cron-backup.json`
+- `cron-restore.json`
 - `skills/india-evisa-report-sync/`
 - `skills/sri-lanka-eta-report-sync/`
 - `skills/australia-visa-report-sync/`
