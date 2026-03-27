@@ -48,9 +48,21 @@ If the fee page shows `----` or unclear cells:
 ## Report rules
 - Write for Vietnamese leadership first.
 - Use strong headings.
-- Put executive summary early.
+- Use this section order by default:
+  1. `TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA`
+  2. `TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA`
+  3. `TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG`
+  4. `CÁC LOẠI VISA HIỆN HÀNH`
+  5. `GHI CHÚ QUAN TRỌNG`
+  6. `NGUỒN THÔNG TIN`
+  7. `TECHNICAL CHANGELOG`
+- Do not include `EXECUTIVE SUMMARY` unless explicitly requested.
+- Do not include `TÓM TẮT THAY ĐỔI SO VỚI BASE / ĐẦU VÀO NỘI BỘ` unless explicitly requested.
+- If there is no fee / policy / document / validity / entry-rule / exception change vs yesterday, write exactly: `Không phát hiện sự thay đổi so với báo cáo hôm qua`.
+- Put formatting-only or rendering-only differences into `TECHNICAL CHANGELOG`, not into the main business-change summary.
 - Separate confirmed facts from caveats.
 - Mention alert-based overrides near the fee section, not buried later.
+- In `NGUỒN THÔNG TIN`, list all official URLs reviewed, including subpages and PDFs.
 
 ## Safe claims from the March 2026 run
 Generally safe to state:

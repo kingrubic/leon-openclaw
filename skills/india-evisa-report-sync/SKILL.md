@@ -10,10 +10,10 @@ description: Sync, audit, and report India e-Visa information from official gove
 Use this skill to turn the official India e-Visa website into a clean internal deliverable:
 - a dated Google Sheet tab cloned from `Base` and updated with official pricing
 - a Google Docs summary for management
-- a clear explanation of what changed, what stayed the same, and what remains unverified
+- a strict change-focused report that separates business-relevant changes from technical formatting noise
 
 Read `references/official-sources.md` first if you need the exact source structure or wording rules.
-Read `references/field-rules.md` when matching visa types, fee columns, or country names.
+Read `references/field-rules.md` when matching visa types, fee columns, country names, or report-structure rules.
 
 ## Workflow
 
@@ -76,17 +76,23 @@ If `Student` or `Transit` fees are not clearly published in the same official so
 
 ### 5. Write the management report in Google Docs
 
-Structure the report for executives:
-- title
-- date
-- source link
-- executive summary
-- changed pricing summary
-- visa categories
-- per-visa requirements / validity / notes
-- processing-time guidance
-- link to the detailed sheet tab
-- caveats / unresolved items
+Use this fixed section order unless the user explicitly overrides it:
+1. `TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA`
+2. `TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA`
+3. `TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG`
+4. `CÁC LOẠI VISA HIỆN HÀNH`
+5. `GHI CHÚ QUAN TRỌNG`
+6. `NGUỒN THÔNG TIN`
+7. `TECHNICAL CHANGELOG` (internal-facing, for non-policy / non-business diffs such as formatting or source-render changes)
+
+Report rules:
+- Do **not** include an `EXECUTIVE SUMMARY` section unless the user explicitly asks for it.
+- Do **not** include `TÓM TẮT THAY ĐỔI SO VỚI BASE / ĐẦU VÀO NỘI BỘ` unless the user explicitly asks for Base comparison.
+- In section 1, if there is **no** change in visa fee, validity wording, entry rules, required documents, processing guidance, nationality exceptions, or other policy-relevant content, write exactly: `Không phát hiện sự thay đổi so với báo cáo hôm qua`.
+- Put business-relevant changes in sections 1/2/3; put purely technical diffs such as `0 -> 00`, whitespace shifts, label normalization, or rendering-only changes in `TECHNICAL CHANGELOG`.
+- Section 4 must summarize current visa types, required documents, validity / entries / stay, with detailed fee values left in the linked sheet when that is cleaner.
+- Section 5 must capture practical notes such as lead time before travel, usage window after visa issuance, and major economic / political developments affecting visa handling if officially evidenced.
+- Section 6 must include all official source URLs reviewed, including subpages and PDFs.
 
 Formatting rules:
 - use headers generously
@@ -118,8 +124,13 @@ When doing recurring checks:
 5. create a new dated tab
 6. keep unchanged values intact
 7. bold only changed values
-8. refresh the Google Docs summary
-9. call out any schema/source changes immediately
+8. classify differences into:
+   - policy / business changes
+   - technical-only changes
+9. refresh the Google Docs summary using the fixed section order
+10. if no policy-relevant change vs yesterday, write exactly: `Không phát hiện sự thay đổi so với báo cáo hôm qua`
+11. move items like `0 -> 00` into `TECHNICAL CHANGELOG`
+12. call out any schema/source changes immediately
 
 ## Known lessons from the March 2026 run
 

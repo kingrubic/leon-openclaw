@@ -11,9 +11,10 @@ Use this skill to turn Sri Lanka ETA official public information into a manageme
 - one Google Sheet workbook in the same operational style as the India workbook
 - one Google Docs summary in Vietnamese for leadership
 - explicit QA notes where the official Sri Lanka site is inconsistent
+- a strict separation between policy-relevant changes and technical-only changes
 
 Read `references/official-sources.md` first for the source map.
-Read `references/qa-rules.md` before writing conclusions or system-facing wording.
+Read `references/qa-rules.md` before writing conclusions, report sections, or system-facing wording.
 
 ## Workflow
 
@@ -71,11 +72,25 @@ But adapt the content model to Sri Lanka:
 
 Default audience is Vietnamese management.
 
+Use this fixed section order unless the user explicitly overrides it:
+1. `TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA`
+2. `TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA`
+3. `TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG`
+4. `CÁC LOẠI VISA HIỆN HÀNH`
+5. `GHI CHÚ QUAN TRỌNG`
+6. `NGUỒN THÔNG TIN`
+7. `TECHNICAL CHANGELOG`
+
 Report requirements:
 - Vietnamese first
 - headings visible and strong
-- executive summary near the top
-- clear fee summary
+- no `EXECUTIVE SUMMARY` section unless explicitly requested
+- no `TÓM TẮT THAY ĐỔI SO VỚI BASE / ĐẦU VÀO NỘI BỘ` unless explicitly requested
+- if there is no fee / policy / wording / document / validity / exception change vs yesterday, write exactly: `Không phát hiện sự thay đổi so với báo cáo hôm qua`
+- keep business-relevant changes in sections 1/2/3 and move formatting-only diffs into `TECHNICAL CHANGELOG`
+- section 4 must summarize visa/ETA types, required documents, validity / entries / stay
+- section 5 must capture timing guidance, validity-window caveats, and material economic / political developments affecting visa handling if officially evidenced
+- section 6 must list all official URLs reviewed, including subpages and PDFs
 - clear caveats
 - no overclaiming
 
@@ -116,8 +131,11 @@ Avoid flat claims like:
 4. Compare alert exceptions against the standard fee table.
 5. Update the Sri Lanka workbook.
 6. Keep the layout stable for internal readers.
-7. Update the Vietnamese management report.
-8. Call out any contradiction or override explicitly.
+7. Classify differences into policy/business changes vs technical-only changes.
+8. Update the Vietnamese management report using the fixed section order.
+9. If no policy-relevant change vs yesterday, write exactly: `Không phát hiện sự thay đổi so với báo cáo hôm qua`.
+10. Put formatting-only changes into `TECHNICAL CHANGELOG`.
+11. Call out any contradiction or override explicitly.
 
 ## Known March 2026 lessons
 

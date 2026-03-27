@@ -26,6 +26,23 @@ Avoid unless separately verified:
 - “free visa”
 - “no visa required”
 
+## Report structure rules
+Use this section order by default:
+1. `TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA`
+2. `TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA`
+3. `TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG`
+4. `CÁC LOẠI VISA HIỆN HÀNH`
+5. `GHI CHÚ QUAN TRỌNG`
+6. `NGUỒN THÔNG TIN`
+7. `TECHNICAL CHANGELOG`
+
+Default rules:
+- Do not include `EXECUTIVE SUMMARY` unless explicitly requested.
+- Do not include `TÓM TẮT THAY ĐỔI SO VỚI BASE / ĐẦU VÀO NỘI BỘ` unless explicitly requested.
+- If there is no fee / policy / document / validity / entry-rule change vs yesterday, write exactly: `Không phát hiện sự thay đổi so với báo cáo hôm qua`.
+- Put formatting-only or rendering-only differences such as `0 -> 00` into `TECHNICAL CHANGELOG`, not into the main business-change summary.
+- In `NGUỒN THÔNG TIN`, list all reviewed official HTML pages, subpages, and PDFs.
+
 ## Country-name normalization examples
 Common mismatches encountered in the March 2026 run:
 - `Bosnia & Herzegovina` -> `Bosnia and Herzegovina`
