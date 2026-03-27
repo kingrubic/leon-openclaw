@@ -1,0 +1,21 @@
+{
+  "updatedAt": "2026-03-27T09:49:00+07:00",
+  "jobs": [
+    {
+      "id": "21242d16-3ae0-4898-abae-ad59e0a32b46",
+      "name": "Australia visa daily report 8:30 AM",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 8 * * *",
+        "tz": "Asia/Saigon"
+      },
+      "sessionTarget": "isolated",
+      "delivery": {
+        "mode": "announce"
+      },
+      "summary": "Australia daily visa report for ETA 601 / eVisitor 651 / Visitor 600 / Transit 771 using fixed workbook Australia Visa - Official Tracker and approved 8-section report format.",
+      "nextKnownRunNote": "Runs daily at 08:30 Asia/Saigon."
+    }
+  ]
+}
