@@ -22,13 +22,21 @@ Suggested columns:
 
 Use when the user wants a concise business-facing memo.
 
-Recommended structure:
+For the approved Australia daily-report flow, default to this structure instead:
 
-1. Executive summary
-2. Main visa products reviewed
-3. Important cautions / QA notes
-4. Recent-news check result
-5. Operational recommendation
+1. TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA
+2. TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA
+3. TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG
+4. CÁC LOẠI VISA HIỆN HÀNH
+5. TIN TỨC VISA TỪ BÁO CHÍ
+6. GHI CHÚ QUAN TRỌNG
+7. NGUỒN THÔNG TIN
+8. TECHNICAL CHANGELOG
+
+Formatting reminders:
+- sections 1..8 are real Google Docs headings
+- visa/stream labels are bold only, not headings
+- section 7 splits sources into `Web chính phủ` and `Link báo chí`
 
 Keep it short. Prefer bullets over long paragraphs.
 

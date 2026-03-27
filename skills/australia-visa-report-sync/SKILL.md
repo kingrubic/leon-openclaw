@@ -13,6 +13,16 @@ Treat **Department of Home Affairs** as the primary source of truth.
 
 Use secondary sources such as **australia.com** and **Executive Traveller** only for supplementary travel/news context. Never let them override Home Affairs wording.
 
+## Approved operating scope
+
+Default daily-report scope approved by Anh Bảo on 2026-03-27:
+- `ETA 601`
+- `eVisitor 651`
+- `Visitor 600`
+- `Transit 771`
+
+Unless the user expands scope, keep the daily workflow anchored to those products/streams.
+
 ## Workflow
 
 ### 1. Decide the job type
@@ -85,12 +95,32 @@ Output for this step should be simple:
 
 ### 7. Produce the deliverable
 
-Choose the smallest useful output:
+For the approved Australia daily-report workflow, use this fixed report order unless the user explicitly overrides it:
+1. `TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA`
+2. `TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA`
+3. `TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG`
+4. `CÁC LOẠI VISA HIỆN HÀNH`
+5. `TIN TỨC VISA TỪ BÁO CHÍ`
+6. `GHI CHÚ QUAN TRỌNG`
+7. `NGUỒN THÔNG TIN`
+8. `TECHNICAL CHANGELOG`
 
-- internal tracker rows
-- concise brief
-- manager-ready memo
-- QA note with risky claims to avoid
+Formatting rules approved by Anh Bảo:
+- sections `1..8` must be real Google Docs headings
+- visa / stream labels such as `ETA 601`, `eVisitor 651`, `Visitor 600 - Business Visitor stream`, `Transit 771`, `TWOV` should be bold only, not headings
+- bold key operational facts for business readers
+
+Business rules:
+- if there is no substantive change vs yesterday in fee, policy wording, validity, stay, entry rules, documents, nationality exceptions, or other policy-relevant content, section 1 must say exactly: `Không phát hiện sự thay đổi so với báo cáo hôm qua`
+- technical-only diffs belong in `TECHNICAL CHANGELOG`, not in the business-change summary
+- section 5 scans only the approved secondary sources `https://www.australia.com/` and `https://www.executivetraveller.com/` for the last 7 days unless the user changes the scope
+- if section 5 finds no visa-related item, write exactly: `Không phát hiện tin tức mới liên quan đến Visa trong 7 ngày gần nhất`
+- section 7 must split sources into two subgroups: `Web chính phủ` and `Link báo chí`
+
+Workbook rule:
+- use the existing Google Sheet workbook `Australia Visa - Official Tracker`
+- create/update dated tabs inside that workbook for each run
+- do **not** create a new spreadsheet file unless the user explicitly asks
 
 Read `references/deliverable-patterns.md` when drafting the final output.
 
