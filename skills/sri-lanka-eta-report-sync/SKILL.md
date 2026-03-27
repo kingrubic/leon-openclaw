@@ -96,7 +96,25 @@ Report requirements:
 
 Keep English only for necessary visa/ETA terminology where precision matters.
 
-### 6. Mandatory QA rules
+### 6. QA finalization and summary-tracker update
+
+After the report and sheet pass QA, update the central summary workbook before sending the completion message:
+- summary workbook: `Tổng hợp báo cáo Visa`
+- spreadsheet id: `1XHtNTEb8XXyCrQcWYYMsK8lu0DZ2Jynmp8SlXJVI1Ag`
+- add one row per completed report run
+- keep `Thay đổi so với báo cáo trước?` to only two values: `Không` or `Có`
+- if the run is a baseline / first report and there is no substantive change comparison yet, still use `Không` for that column to keep the summary simple
+- put extra context in `Ghi chú thêm` only when helpful
+
+Completion message rule:
+- send only these user-facing items at the end:
+  1. Link tổng hợp
+  2. Link docs
+  3. Link sheet
+  4. one short Vietnamese change summary
+- if there is no substantive change, use exactly: `Không có thay đổi so với báo cáo trước`
+
+### 7. Mandatory QA rules
 
 Always caveat these areas unless the official site becomes fully consistent:
 - “visa-free” vs “still must apply for ETA”
