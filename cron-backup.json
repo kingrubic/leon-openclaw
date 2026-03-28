@@ -1,104 +1,213 @@
-[
-  {
-    "id": "1db77518-35b3-4bb1-b289-8453203576a4",
-    "name": "Workspace GitHub backup 00:00",
-    "enabled": true,
-    "schedule": {
-      "kind": "cron",
-      "expr": "0 0 * * *",
-      "tz": "Asia/Saigon"
+﻿{
+  "jobs": [
+    {
+      "id": "1db77518-35b3-4bb1-b289-8453203576a4",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "Workspace GitHub backup 00:00",
+      "enabled": true,
+      "createdAtMs": 1774592673689,
+      "updatedAtMs": 1774630969622,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 0 * * *",
+        "tz": "Asia/Saigon"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 1800,
+        "message": "Run the daily Leon workspace backup to GitHub.\n\nRequirements:\n1. Work in `/Users/admin/.openclaw/workspace`.\n2. Refresh `cron-backup.json` from the current cron job list if needed.\n3. Stage only backup-relevant workspace content:\n   - `memory/`\n   - `skills/`\n   - `cron-backup.json`\n4. Create a commit only if there are actual changes.\n5. Push to GitHub repo `https://github.com/kingrubic/leon-openclaw` on branch `main`.\n6. If there are no changes, do not create an empty commit; just report that backup was checked and nothing changed.\n7. Return a short plain-text status summary suitable for chat.\n\nThis is an internal backup workflow for Leon memory + skills + cron snapshot."
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "nextRunAtMs": 1774717200000,
+        "lastRunAtMs": 1774630800007,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 169615,
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1,
+        "runningAtMs": 1774717200019
+      }
     },
-    "sessionTarget": "isolated",
-    "wakeMode": "now",
-    "payload": {
-      "kind": "agentTurn",
-      "timeoutSeconds": 1800,
-      "message": "Run the daily Leon workspace backup to GitHub.\n\nRequirements:\n1. Work in `/Users/admin/.openclaw/workspace`.\n2. Refresh `cron-backup.json` from the current cron job list if needed.\n3. Stage only backup-relevant workspace content:\n   - `memory/`\n   - `skills/`\n   - `cron-backup.json`\n4. Create a commit only if there are actual changes.\n5. Push to GitHub repo `https://github.com/kingrubic/leon-openclaw` on branch `main`.\n6. If there are no changes, do not create an empty commit; just report that backup was checked and nothing changed.\n7. Return a short plain-text status summary suitable for chat.\n\nThis is an internal backup workflow for Leon memory + skills + cron snapshot."
-    }
-  },
-  {
-    "id": "8837893d-e8fc-4036-93ba-3f2b6b2a87c8",
-    "name": "India eVisa daily report 8:00 AM",
-    "enabled": true,
-    "schedule": {
-      "kind": "cron",
-      "expr": "0 8 * * *",
-      "tz": "Asia/Saigon"
+    {
+      "id": "8837893d-e8fc-4036-93ba-3f2b6b2a87c8",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "India eVisa daily report 8:00 AM",
+      "enabled": true,
+      "createdAtMs": 1774592622372,
+      "updatedAtMs": 1774659959094,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * *",
+        "tz": "Asia/Saigon"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 1800,
+        "message": "Run the India e-Visa daily reporting workflow for the official source set under https://indianvisaonline.gov.in/evisa/tvoa.html.\n\nRequirements:\n1. Use the workspace skill `india-evisa-report-sync` and the current approved India workflow.\n2. Use the existing India workbook as the fixed workbook; create/update only the dated tab for the run day. Do not create a new spreadsheet file unless explicitly requested.\n3. Keep the approved report structure and QA rules:\n   - 1. T├ôM Tß║«T THAY ─Éß╗öI SO Vß╗ÜI H├öM QUA\n   - 2. T├ôM Tß║«T THAY ─Éß╗öI TRONG 7 NG├ÇY QUA\n   - 3. T├ôM Tß║«T THAY ─Éß╗öI Tß╗¬ ─Éß║ªU TH├üNG\n   - 4. C├üC LOß║áI VISA HIß╗åN H├ÇNH\n   - 5. GHI CH├Ü QUAN TRß╗îNG\n   - 6. NGUß╗ÆN TH├öNG TIN\n   - 7. TECHNICAL CHANGELOG\n4. Sections must be real Google Docs headings; visa/category labels should be bold only where appropriate.\n5. If there is no substantive change vs yesterday in fee, policy wording, validity, entry rules, required documents, processing guidance, nationality exceptions, or other policy-relevant content, section 1 must say exactly: Kh├┤ng ph├ít hiß╗çn sß╗▒ thay ─æß╗òi so vß╗¢i b├ío c├ío h├┤m qua.\n6. Put technical-only diffs such as 0 -> 00 into TECHNICAL CHANGELOG, not the business-change summary.\n7. After QA is complete, update the summary workbook `Tß╗òng hß╗úp b├ío c├ío Visa` (spreadsheet id: `1XHtNTEb8XXyCrQcWYYMsK8lu0DZ2Jynmp8SlXJVI1Ag`).\n8. In the summary workbook, `Thay ─æß╗òi so vß╗¢i b├ío c├ío tr╞░ß╗¢c?` must use only `Kh├┤ng` or `C├│`.\n9. Final completion message should contain only:\n   - Link tß╗òng hß╗úp\n   - Link docs\n   - Link sheet\n   - one short Vietnamese change summary\n   - if no substantive change, use exactly: Kh├┤ng c├│ thay ─æß╗òi so vß╗¢i b├ío c├ío tr╞░ß╗¢c\n\nKeep the approved India formatting and workbook behavior consistent."
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "nextRunAtMs": 1774746000000,
+        "lastRunAtMs": 1774659600007,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 359087,
+        "lastError": "Channel is required (no configured channels detected). Set delivery.channel explicitly or use a main session with a previous channel.",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1
+      }
     },
-    "sessionTarget": "isolated",
-    "wakeMode": "now",
-    "payload": {
-      "kind": "agentTurn",
-      "timeoutSeconds": 1800,
-      "message": "Run the India e-Visa daily reporting workflow for the official source set under https://indianvisaonline.gov.in/evisa/tvoa.html.\n\nRequirements:\n1. Use the workspace skill `india-evisa-report-sync` and the current approved India workflow.\n2. Use the existing India workbook as the fixed workbook; create/update only the dated tab for the run day. Do not create a new spreadsheet file unless explicitly requested.\n3. Keep the approved report structure and QA rules:\n   - 1. TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA\n   - 2. TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA\n   - 3. TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG\n   - 4. CÁC LOẠI VISA HIỆN HÀNH\n   - 5. GHI CHÚ QUAN TRỌNG\n   - 6. NGUỒN THÔNG TIN\n   - 7. TECHNICAL CHANGELOG\n4. Sections must be real Google Docs headings; visa/category labels should be bold only where appropriate.\n5. If there is no substantive change vs yesterday in fee, policy wording, validity, entry rules, required documents, processing guidance, nationality exceptions, or other policy-relevant content, section 1 must say exactly: Không phát hiện sự thay đổi so với báo cáo hôm qua.\n6. Put technical-only diffs such as 0 -> 00 into TECHNICAL CHANGELOG, not the business-change summary.\n7. After QA is complete, update the summary workbook `Tổng hợp báo cáo Visa` (spreadsheet id: `1XHtNTEb8XXyCrQcWYYMsK8lu0DZ2Jynmp8SlXJVI1Ag`).\n8. In the summary workbook, `Thay đổi so với báo cáo trước?` must use only `Không` or `Có`.\n9. Final completion message should contain only:\n   - Link tổng hợp\n   - Link docs\n   - Link sheet\n   - one short Vietnamese change summary\n   - if no substantive change, use exactly: Không có thay đổi so với báo cáo trước\n\nKeep the approved India formatting and workbook behavior consistent."
-    }
-  },
-  {
-    "id": "1b4934bb-7db2-492b-999f-f76ceaf1198a",
-    "name": "Sri Lanka ETA daily report 8:15 AM",
-    "enabled": true,
-    "schedule": {
-      "kind": "cron",
-      "expr": "15 8 * * *",
-      "tz": "Asia/Saigon"
+    {
+      "id": "1b4934bb-7db2-492b-999f-f76ceaf1198a",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "Sri Lanka ETA daily report 8:15 AM",
+      "enabled": true,
+      "createdAtMs": 1774592635140,
+      "updatedAtMs": 1774660717291,
+      "schedule": {
+        "kind": "cron",
+        "expr": "15 8 * * *",
+        "tz": "Asia/Saigon"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 1800,
+        "message": "Run the Sri Lanka ETA daily reporting workflow for the official source set under https://www.eta.gov.lk/.\n\nRequirements:\n1. Use the workspace skill `sri-lanka-eta-report-sync` and the current approved Sri Lanka workflow.\n2. Use the existing Sri Lanka workbook as the fixed workbook; create/update only the dated tab for the run day. Do not create a new spreadsheet file unless explicitly requested.\n3. Keep the approved report structure and QA rules:\n   - 1. T├ôM Tß║«T THAY ─Éß╗öI SO Vß╗ÜI H├öM QUA\n   - 2. T├ôM Tß║«T THAY ─Éß╗öI TRONG 7 NG├ÇY QUA\n   - 3. T├ôM Tß║«T THAY ─Éß╗öI Tß╗¬ ─Éß║ªU TH├üNG\n   - 4. C├üC LOß║áI VISA HIß╗åN H├ÇNH\n   - 5. GHI CH├Ü QUAN TRß╗îNG\n   - 6. NGUß╗ÆN TH├öNG TIN\n   - 7. TECHNICAL CHANGELOG\n4. Sections must be real Google Docs headings; ETA/category labels should be bold only where appropriate.\n5. If there is no substantive change vs yesterday in fee, policy wording, validity, entry rules, required documents, nationality exceptions, alerts, or other policy-relevant content, section 1 must say exactly: Kh├┤ng ph├ít hiß╗çn sß╗▒ thay ─æß╗òi so vß╗¢i b├ío c├ío h├┤m qua.\n6. Put technical-only diffs into TECHNICAL CHANGELOG, not the business-change summary.\n7. Maintain strict contradiction caveats where the official Sri Lanka site is inconsistent.\n8. After QA is complete, update the summary workbook `Tß╗òng hß╗úp b├ío c├ío Visa` (spreadsheet id: `1XHtNTEb8XXyCrQcWYYMsK8lu0DZ2Jynmp8SlXJVI1Ag`).\n9. In the summary workbook, `Thay ─æß╗òi so vß╗¢i b├ío c├ío tr╞░ß╗¢c?` must use only `Kh├┤ng` or `C├│`.\n10. Final completion message should contain only:\n   - Link tß╗òng hß╗úp\n   - Link docs\n   - Link sheet\n   - one short Vietnamese change summary\n   - if no substantive change, use exactly: Kh├┤ng c├│ thay ─æß╗òi so vß╗¢i b├ío c├ío tr╞░ß╗¢c\n\nKeep the approved Sri Lanka formatting and workbook behavior consistent."
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "nextRunAtMs": 1774746900000,
+        "lastRunAtMs": 1774660500018,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 217273,
+        "lastError": "Channel is required (no configured channels detected). Set delivery.channel explicitly or use a main session with a previous channel.",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1
+      }
     },
-    "sessionTarget": "isolated",
-    "wakeMode": "now",
-    "payload": {
-      "kind": "agentTurn",
-      "timeoutSeconds": 1800,
-      "message": "Run the Sri Lanka ETA daily reporting workflow for the official source set under https://www.eta.gov.lk/.\n\nRequirements:\n1. Use the workspace skill `sri-lanka-eta-report-sync` and the current approved Sri Lanka workflow.\n2. Use the existing Sri Lanka workbook as the fixed workbook; create/update only the dated tab for the run day. Do not create a new spreadsheet file unless explicitly requested.\n3. Keep the approved report structure and QA rules:\n   - 1. TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA\n   - 2. TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA\n   - 3. TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG\n   - 4. CÁC LOẠI VISA HIỆN HÀNH\n   - 5. GHI CHÚ QUAN TRỌNG\n   - 6. NGUỒN THÔNG TIN\n   - 7. TECHNICAL CHANGELOG\n4. Sections must be real Google Docs headings; ETA/category labels should be bold only where appropriate.\n5. If there is no substantive change vs yesterday in fee, policy wording, validity, entry rules, required documents, nationality exceptions, alerts, or other policy-relevant content, section 1 must say exactly: Không phát hiện sự thay đổi so với báo cáo hôm qua.\n6. Put technical-only diffs into TECHNICAL CHANGELOG, not the business-change summary.\n7. Maintain strict contradiction caveats where the official Sri Lanka site is inconsistent.\n8. After QA is complete, update the summary workbook `Tổng hợp báo cáo Visa` (spreadsheet id: `1XHtNTEb8XXyCrQcWYYMsK8lu0DZ2Jynmp8SlXJVI1Ag`).\n9. In the summary workbook, `Thay đổi so với báo cáo trước?` must use only `Không` or `Có`.\n10. Final completion message should contain only:\n   - Link tổng hợp\n   - Link docs\n   - Link sheet\n   - one short Vietnamese change summary\n   - if no substantive change, use exactly: Không có thay đổi so với báo cáo trước\n\nKeep the approved Sri Lanka formatting and workbook behavior consistent."
-    }
-  },
-  {
-    "id": "15050454-fb5e-48fa-9083-af5b45f7183d",
-    "name": "Australia visa daily report 8:30 AM",
-    "enabled": true,
-    "schedule": {
-      "kind": "cron",
-      "expr": "30 8 * * *",
-      "tz": "Asia/Saigon"
+    {
+      "id": "15050454-fb5e-48fa-9083-af5b45f7183d",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "Australia visa daily report 8:30 AM",
+      "enabled": true,
+      "createdAtMs": 1774592651494,
+      "updatedAtMs": 1774661882340,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 8 * * *",
+        "tz": "Asia/Saigon"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 1800,
+        "message": "Run the Australia visa daily reporting workflow for the official source set covering scope: ETA 601, eVisitor 651, Visitor 600, and Transit 771.\n\nRequirements:\n1. Use the same Australia reporting workflow, source map, and QA approach established on 2026-03-27.\n2. Use the existing Google Sheet workbook `Australia Visa - Official Tracker` (spreadsheet id: `1CvFh__9qmfUDb96uOsc4cM8jvLL13lGBYGqbh12aUWo`) as the fixed workbook.\n3. Create/update a dated tab inside that workbook for the run day. Do not create a new spreadsheet file unless the user explicitly asks.\n4. Keep the exact report structure and formatting rules already approved:\n   - 1. T├ôM Tß║«T THAY ─Éß╗öI SO Vß╗ÜI H├öM QUA\n   - 2. T├ôM Tß║«T THAY ─Éß╗öI TRONG 7 NG├ÇY QUA\n   - 3. T├ôM Tß║«T THAY ─Éß╗öI Tß╗¬ ─Éß║ªU TH├üNG\n   - 4. C├üC LOß║áI VISA HIß╗åN H├ÇNH\n   - 5. TIN Tß╗¿C VISA Tß╗¬ B├üO CH├ì\n   - 6. GHI CH├Ü QUAN TRß╗îNG\n   - 7. NGUß╗ÆN TH├öNG TIN\n   - 8. TECHNICAL CHANGELOG\n5. Formatting rules:\n   - Sections 1..8 must be real Google Docs headings.\n   - Visa/stream labels such as ETA 601, eVisitor 651, Visitor 600 streams, Transit 771, TWOV should be bold only, not headings.\n   - Bold key operational facts for business readers.\n6. Business logic rules:\n   - If there is no substantive change vs yesterday in fee, policy wording, validity, stay, entry rules, documents, exceptions, or other policy-relevant content, section 1 must say exactly: Kh├┤ng ph├ít hiß╗çn sß╗▒ thay ─æß╗òi so vß╗¢i b├ío c├ío h├┤m qua.\n   - Put technical-only diffs in section 8, not in the business summary.\n7. Section 5 (TIN Tß╗¿C VISA Tß╗¬ B├üO CH├ì): review https://www.australia.com/ and https://www.executivetraveller.com/ for visa-related news in the last 7 days. If none, write exactly: Kh├┤ng ph├ít hiß╗çn tin tß╗⌐c mß╗¢i li├¬n quan ─æß║┐n Visa trong 7 ng├áy gß║ºn nhß║Ñt.\n8. Section 7 (NGUß╗ÆN TH├öNG TIN): split into two subsections: Web ch├¡nh phß╗º and Link b├ío ch├¡.\n9. Preserve the same Google Docs operating style as the approved 2026-03-27 Australia baseline.\n10. At the end, post back in chat with the Google Docs link, Google Sheet link, and a short Vietnamese summary of substantive changes vs yesterday.\n\nCurrent baseline style and workbook behavior were approved by Anh Bß║úo on 2026-03-27. Keep them consistent."
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "nextRunAtMs": 1774747800000,
+        "lastRunAtMs": 1774661400020,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 482320,
+        "lastError": "Channel is required (no configured channels detected). Set delivery.channel explicitly or use a main session with a previous channel.",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1
+      }
     },
-    "sessionTarget": "isolated",
-    "wakeMode": "now",
-    "payload": {
-      "kind": "agentTurn",
-      "timeoutSeconds": 1800,
-      "message": "Run the Australia visa daily reporting workflow for the official source set covering scope: ETA 601, eVisitor 651, Visitor 600, and Transit 771.\n\nRequirements:\n1. Use the same Australia reporting workflow, source map, and QA approach established on 2026-03-27.\n2. Use the existing Google Sheet workbook `Australia Visa - Official Tracker` (spreadsheet id: `1CvFh__9qmfUDb96uOsc4cM8jvLL13lGBYGqbh12aUWo`) as the fixed workbook.\n3. Create/update a dated tab inside that workbook for the run day. Do not create a new spreadsheet file unless the user explicitly asks.\n4. Keep the exact report structure and formatting rules already approved:\n   - 1. TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA\n   - 2. TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA\n   - 3. TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG\n   - 4. CÁC LOẠI VISA HIỆN HÀNH\n   - 5. TIN TỨC VISA TỪ BÁO CHÍ\n   - 6. GHI CHÚ QUAN TRỌNG\n   - 7. NGUỒN THÔNG TIN\n   - 8. TECHNICAL CHANGELOG\n5. Formatting rules:\n   - Sections 1..8 must be real Google Docs headings.\n   - Visa/stream labels such as ETA 601, eVisitor 651, Visitor 600 streams, Transit 771, TWOV should be bold only, not headings.\n   - Bold key operational facts for business readers.\n6. Business logic rules:\n   - If there is no substantive change vs yesterday in fee, policy wording, validity, stay, entry rules, documents, exceptions, or other policy-relevant content, section 1 must say exactly: Không phát hiện sự thay đổi so với báo cáo hôm qua.\n   - Put technical-only diffs in section 8, not in the business summary.\n7. Section 5 (TIN TỨC VISA TỪ BÁO CHÍ): review https://www.australia.com/ and https://www.executivetraveller.com/ for visa-related news in the last 7 days. If none, write exactly: Không phát hiện tin tức mới liên quan đến Visa trong 7 ngày gần nhất.\n8. Section 7 (NGUỒN THÔNG TIN): split into two subsections: Web chính phủ and Link báo chí.\n9. Preserve the same Google Docs operating style as the approved 2026-03-27 Australia baseline.\n10. At the end, post back in chat with the Google Docs link, Google Sheet link, and a short Vietnamese summary of substantive changes vs yesterday.\n\nCurrent baseline style and workbook behavior were approved by Anh Bảo on 2026-03-27. Keep them consistent."
-    }
-  },
-  {
-    "id": "f56c6c5e-c2f8-4f5a-b3de-9e79ce1a6a7d",
-    "name": "Indonesia visa daily report 8:45 AM",
-    "enabled": true,
-    "schedule": {
-      "kind": "cron",
-      "expr": "45 8 * * *",
-      "tz": "Asia/Saigon"
+    {
+      "id": "f56c6c5e-c2f8-4f5a-b3de-9e79ce1a6a7d",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "Indonesia visa daily report 8:45 AM",
+      "enabled": true,
+      "createdAtMs": 1774592665260,
+      "updatedAtMs": 1774662621231,
+      "schedule": {
+        "kind": "cron",
+        "expr": "45 8 * * *",
+        "tz": "Asia/Saigon"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 1800,
+        "message": "Run the Indonesia visa daily reporting workflow for the official source set under https://evisa.imigrasi.go.id/.\n\nRequirements:\n1. Use the same Indonesia workflow established on 2026-03-27 and keep the fixed workbook `Indonesia Visa - Official Tracker` (spreadsheet id: `1rrt6m2YRot1VY1DE6nMxPoqA7sDBdKuN7OfiVPshERc`).\n2. Create/update only the dated tab for the run day. Do not create a new spreadsheet file unless explicitly requested.\n3. Keep the approved report structure:\n   - 1. T├ôM Tß║«T THAY ─Éß╗öI SO Vß╗ÜI H├öM QUA\n   - 2. T├ôM Tß║«T THAY ─Éß╗öI TRONG 7 NG├ÇY QUA\n   - 3. T├ôM Tß║«T THAY ─Éß╗öI Tß╗¬ ─Éß║ªU TH├üNG\n   - 4. C├üC LOß║áI VISA HIß╗åN H├ÇNH\n   - 5. TIN Tß╗¿C VISA Tß╗¬ B├üO CH├ì\n   - 6. GHI CH├Ü QUAN TRß╗îNG\n   - 7. NGUß╗ÆN TH├öNG TIN\n   - 8. TECHNICAL CHANGELOG\n4. Sections 1..8 must be real Google Docs headings. Visa labels should be bold only, not headings.\n5. Preserve the current approved Indonesia trial scope unless the user expands it: B1 / C1 / D1 / C2 / D2 / B4 / C4 / D4 from the official eVisa selector.\n6. If there is no substantive change vs yesterday in fee, policy wording, validity, stay, entry rules, document requirements, nationality eligibility, or other policy-relevant content, section 1 must say exactly: Kh├┤ng ph├ít hiß╗çn sß╗▒ thay ─æß╗òi so vß╗¢i b├ío c├ío h├┤m qua.\n7. Put technical-only diffs into TECHNICAL CHANGELOG, not the business-change summary.\n8. After QA is complete, update the summary workbook `Tß╗òng hß╗úp b├ío c├ío Visa` (spreadsheet id: `1XHtNTEb8XXyCrQcWYYMsK8lu0DZ2Jynmp8SlXJVI1Ag`).\n9. In the summary workbook, `Thay ─æß╗òi so vß╗¢i b├ío c├ío tr╞░ß╗¢c?` must use only `Kh├┤ng` or `C├│`.\n10. Final completion message should contain only:\n   - Link tß╗òng hß╗úp\n   - Link docs\n   - Link sheet\n   - one short Vietnamese change summary\n   - if no substantive change, use exactly: Kh├┤ng c├│ thay ─æß╗òi so vß╗¢i b├ío c├ío tr╞░ß╗¢c\n\nKeep the approved formatting and workbook behavior consistent."
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "nextRunAtMs": 1774748700000,
+        "lastRunAtMs": 1774662300017,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 321214,
+        "lastError": "Channel is required (no configured channels detected). Set delivery.channel explicitly or use a main session with a previous channel.",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1
+      }
     },
-    "sessionTarget": "isolated",
-    "wakeMode": "now",
-    "payload": {
-      "kind": "agentTurn",
-      "timeoutSeconds": 1800,
-      "message": "Run the Indonesia visa daily reporting workflow for the official source set under https://evisa.imigrasi.go.id/.\n\nRequirements:\n1. Use the same Indonesia workflow established on 2026-03-27 and keep the fixed workbook `Indonesia Visa - Official Tracker` (spreadsheet id: `1rrt6m2YRot1VY1DE6nMxPoqA7sDBdKuN7OfiVPshERc`).\n2. Create/update only the dated tab for the run day. Do not create a new spreadsheet file unless explicitly requested.\n3. Keep the approved report structure:\n   - 1. TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA\n   - 2. TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA\n   - 3. TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG\n   - 4. CÁC LOẠI VISA HIỆN HÀNH\n   - 5. TIN TỨC VISA TỪ BÁO CHÍ\n   - 6. GHI CHÚ QUAN TRỌNG\n   - 7. NGUỒN THÔNG TIN\n   - 8. TECHNICAL CHANGELOG\n4. Sections 1..8 must be real Google Docs headings. Visa labels should be bold only, not headings.\n5. Preserve the current approved Indonesia trial scope unless the user expands it: B1 / C1 / D1 / C2 / D2 / B4 / C4 / D4 from the official eVisa selector.\n6. If there is no substantive change vs yesterday in fee, policy wording, validity, stay, entry rules, document requirements, nationality eligibility, or other policy-relevant content, section 1 must say exactly: Không phát hiện sự thay đổi so với báo cáo hôm qua.\n7. Put technical-only diffs into TECHNICAL CHANGELOG, not the business-change summary.\n8. After QA is complete, update the summary workbook `Tổng hợp báo cáo Visa` (spreadsheet id: `1XHtNTEb8XXyCrQcWYYMsK8lu0DZ2Jynmp8SlXJVI1Ag`).\n9. In the summary workbook, `Thay đổi so với báo cáo trước?` must use only `Không` or `Có`.\n10. Final completion message should contain only:\n   - Link tổng hợp\n   - Link docs\n   - Link sheet\n   - one short Vietnamese change summary\n   - if no substantive change, use exactly: Không có thay đổi so với báo cáo trước\n\nKeep the approved formatting and workbook behavior consistent."
+    {
+      "id": "67615004-5833-41ef-a64a-cfffbf2053f1",
+      "agentId": "main",
+      "sessionKey": "agent:main:main",
+      "name": "Kenya eTA daily report 9:00 AM",
+      "enabled": true,
+      "createdAtMs": 1774598785760,
+      "updatedAtMs": 1774663429314,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * *",
+        "tz": "Asia/Saigon"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 1800,
+        "message": "Run the Kenya eTA daily reporting workflow using the workspace skill `kenya-eta-report-sync` and the fixed official source set under https://etakenya.go.ke/.\n\nRequirements:\n1. Read and follow `skills/kenya-eta-report-sync/SKILL.md` plus its references before collecting data.\n2. Use the fixed official source map already established for Kenya:\n   - /eligibility\n   - /general-information\n   - /faqs\n   - /form/apply/start\n   - /form/apply/how-to-apply?type=tourist\n   - /form/apply/how-to-apply?type=diplomats\n   - /terms-and-conditions\n   - /privacy-policy\n3. Use the existing Google Sheet workbook `Kenya eTA - Official Tracker` (spreadsheet id: `1WJaB0vC_X3qPD5aKoCnhrWy1sViBecKNnQFdmAnxCHc`) as the fixed workbook.\n4. Create/update only the dated tab for the run day. Do not create a new spreadsheet file unless explicitly requested.\n5. Use the established Google Docs style and structure:\n   - 1. T├ôM Tß║«T THAY ─Éß╗öI SO Vß╗ÜI H├öM QUA\n   - 2. T├ôM Tß║«T THAY ─Éß╗öI TRONG 7 NG├ÇY QUA\n   - 3. T├ôM Tß║«T THAY ─Éß╗öI Tß╗¬ ─Éß║ªU TH├üNG\n   - 4. C├üC LOß║áI ETA / DIß╗åN NHß║¼P Cß║óNH HIß╗åN H├ÇNH\n   - 5. GHI CH├Ü QUAN TRß╗îNG\n   - 6. NGUß╗ÆN TH├öNG TIN\n   - 7. TECHNICAL CHANGELOG\n6. Sections must be real Google Docs headings. Product labels should be bold only, not headings.\n7. Keep fee-based eTA products separate from exemption / ETA-not-required regimes.\n8. Mandatory QA: never confuse `valid for travel within 90 days from issuance` with actual duration of stay; explicitly keep point-of-entry discretion caveat where relevant.\n9. If there is no substantive change vs yesterday in fees, processing, validity wording, document requirements, exemptions, nationality eligibility, product availability, or other policy-relevant content, section 1 must say exactly: Kh├┤ng ph├ít hiß╗çn sß╗▒ thay ─æß╗òi so vß╗¢i b├ío c├ío h├┤m qua.\n10. Put technical-only diffs into TECHNICAL CHANGELOG, not the business-change summary.\n11. After QA is complete, update the summary workbook `Tß╗òng hß╗úp b├ío c├ío Visa` (spreadsheet id: `1XHtNTEb8XXyCrQcWYYMsK8lu0DZ2Jynmp8SlXJVI1Ag`).\n12. In the summary workbook, `Thay ─æß╗òi so vß╗¢i b├ío c├ío tr╞░ß╗¢c?` must use only `Kh├┤ng` or `C├│`.\n13. Final completion message should contain only:\n   - Link tß╗òng hß╗úp\n   - Link docs\n   - Link sheet\n   - one short Vietnamese change summary\n   - if no substantive change, use exactly: Kh├┤ng c├│ thay ─æß╗òi so vß╗¢i b├ío c├ío tr╞░ß╗¢c\n\nKeep the approved Kenya baseline wording and workbook behavior consistent."
+      },
+      "delivery": {
+        "mode": "announce"
+      },
+      "state": {
+        "nextRunAtMs": 1774749600000,
+        "lastRunAtMs": 1774663200013,
+        "lastRunStatus": "error",
+        "lastStatus": "error",
+        "lastDurationMs": 229301,
+        "lastError": "Channel is required (no configured channels detected). Set delivery.channel explicitly or use a main session with a previous channel.",
+        "lastDeliveryStatus": "unknown",
+        "consecutiveErrors": 1
+      }
     }
-  },
-  {
-    "id": "67615004-5833-41ef-a64a-cfffbf2053f1",
-    "name": "Kenya eTA daily report 9:00 AM",
-    "enabled": true,
-    "schedule": {
-      "kind": "cron",
-      "expr": "0 9 * * *",
-      "tz": "Asia/Saigon"
-    },
-    "sessionTarget": "isolated",
-    "wakeMode": "now",
-    "payload": {
-      "kind": "agentTurn",
-      "timeoutSeconds": 1800,
-      "message": "Run the Kenya eTA daily reporting workflow using the workspace skill `kenya-eta-report-sync` and the fixed official source set under https://etakenya.go.ke/.\n\nRequirements:\n1. Read and follow `skills/kenya-eta-report-sync/SKILL.md` plus its references before collecting data.\n2. Use the fixed official source map already established for Kenya:\n   - /eligibility\n   - /general-information\n   - /faqs\n   - /form/apply/start\n   - /form/apply/how-to-apply?type=tourist\n   - /form/apply/how-to-apply?type=diplomats\n   - /terms-and-conditions\n   - /privacy-policy\n3. Use the existing Google Sheet workbook `Kenya eTA - Official Tracker` (spreadsheet id: `1WJaB0vC_X3qPD5aKoCnhrWy1sViBecKNnQFdmAnxCHc`) as the fixed workbook.\n4. Create/update only the dated tab for the run day. Do not create a new spreadsheet file unless explicitly requested.\n5. Use the established Google Docs style and structure:\n   - 1. TÓM TẮT THAY ĐỔI SO VỚI HÔM QUA\n   - 2. TÓM TẮT THAY ĐỔI TRONG 7 NGÀY QUA\n   - 3. TÓM TẮT THAY ĐỔI TỪ ĐẦU THÁNG\n   - 4. CÁC LOẠI ETA / DIỆN NHẬP CẢNH HIỆN HÀNH\n   - 5. GHI CHÚ QUAN TRỌNG\n   - 6. NGUỒN THÔNG TIN\n   - 7. TECHNICAL CHANGELOG\n6. Sections must be real Google Docs headings. Product labels should be bold only, not headings.\n7. Keep fee-based eTA products separate from exemption / ETA-not-required regimes.\n8. Mandatory QA: never confuse `valid for travel within 90 days from issuance` with actual duration of stay; explicitly keep point-of-entry discretion caveat where relevant.\n9. If there is no substantive change vs yesterday in fees, processing, validity wording, document requirements, exemptions, nationality eligibility, product availability, or other policy-relevant content, section 1 must say exactly: Không phát hiện sự thay đổi so với báo cáo hôm qua.\n10. Put technical-only diffs into TECHNICAL CHANGELOG, not the business-change summary.\n11. After QA is complete, update the summary workbook `Tổng hợp báo cáo Visa` (spreadsheet id: `1XHtNTEb8XXyCrQcWYYMsK8lu0DZ2Jynmp8SlXJVI1Ag`).\n12. In the summary workbook, `Thay đổi so với báo cáo trước?` must use only `Không` or `Có`.\n13. Final completion message should contain only:\n   - Link tổng hợp\n   - Link docs\n   - Link sheet\n   - one short Vietnamese change summary\n   - if no substantive change, use exactly: Không có thay đổi so với báo cáo trước\n\nKeep the approved Kenya baseline wording and workbook behavior consistent."
-    }
-  }
-]
+  ],
+  "total": 6,
+  "offset": 0,
+  "limit": 6,
+  "hasMore": false,
+  "nextOffset": null
+}
